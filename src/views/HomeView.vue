@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div class="calendar-container">
+      <h2>calendar</h2>
       <CalendarComponent
         :date="new Date()"
         :width="400"
@@ -9,6 +10,7 @@
     </div>
 
     <div class="calendar-container">
+      <h2>date picker</h2>
       <CalendarComponent
         :date="new Date()"
         type="pick"
@@ -20,16 +22,17 @@
     </div>
 
     <div class="calendar-container">
+      <h2>date range picker</h2>
       <CalendarComponent
         :date="new Date()"
         type="range"
-        @pick-range-date="pickRangeDate"
+        @pick-date-range="pickDateRange"
         :width="300"
         :height="300"
       ></CalendarComponent>
       <div>
-        picked date range : {{ ymd(rangeDate.startDate) }} -
-        {{ ymd(rangeDate.endDate) }}
+        picked date range : {{ ymd(dateRange.startDate) }} -
+        {{ ymd(dateRange.endDate) }}
       </div>
     </div>
   </div>
@@ -47,7 +50,7 @@ export default {
   data() {
     return {
       date: undefined,
-      rangeDate: {
+      dateRange: {
         startDate: undefined,
         endDate: undefined,
       },
@@ -57,8 +60,8 @@ export default {
     pickDate(date) {
       this.date = date;
     },
-    pickRangeDate(rangeDate) {
-      this.rangeDate = rangeDate;
+    pickDateRange(dateRange) {
+      this.dateRange = dateRange;
     },
     ymd(_date) {
       if (!_date) return "";

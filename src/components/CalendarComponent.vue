@@ -33,7 +33,7 @@
             @click="pickDate(date, $event)"
             :class="{
               picked: isPickedDate(date),
-              pickedStart: Date.parse(date) === Date.parse(rangeDate.startDate),
+              pickedStart: Date.parse(date) === Date.parse(dateRange.startDate),
             }"
           >
             {{ getDate(date) }}
@@ -79,7 +79,7 @@ export default {
       year: 0,
       month: 0,
       pickedDate: undefined,
-      rangeDate: { startDate: undefined, endDate: undefined },
+      dateRange: { startDate: undefined, endDate: undefined },
       rangeButton: { visibility: false },
       rangeButtonPosition: { x: 0, y: 0 },
     };
@@ -106,8 +106,8 @@ export default {
       if (this.type === "pick" && date) {
         return this.pickedDate === date;
       } else if (this.type === "range" && date) {
-        const start = this.rangeDate.startDate;
-        const end = this.rangeDate.endDate;
+        const start = this.dateRange.startDate;
+        const end = this.dateRange.endDate;
         return (
           Date.parse(start) <= Date.parse(date) &&
           Date.parse(date) <= Date.parse(end)
@@ -116,23 +116,23 @@ export default {
     },
 
     setStartDate() {
-      this.rangeDate.startDate = this.pickedDate;
+      this.dateRange.startDate = this.pickedDate;
       this.rangeButton.visibility = false;
 
-      const start = this.rangeDate.startDate;
-      const end = this.rangeDate.endDate;
+      const start = this.dateRange.startDate;
+      const end = this.dateRange.endDate;
       if (Date.parse(start) > Date.parse(end)) {
-        this.rangeDate.endDate = undefined;
+        this.dateRange.endDate = undefined;
       }
-      this.sendRangeDate();
+      this.sendDateRange();
     },
     setEndDate() {
-      this.rangeDate.endDate = this.pickedDate;
+      this.dateRange.endDate = this.pickedDate;
       this.rangeButton.visibility = false;
-      this.sendRangeDate();
+      this.sendDateRange();
     },
-    sendRangeDate() {
-      this.$emit("pick-range-date", this.rangeDate);
+    sendDateRange() {
+      this.$emit("pick-date-range", this.dateRange);
     },
     prevMonth() {
       if (this.month === 1) {

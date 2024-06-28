@@ -1,24 +1,42 @@
 # calendar
 
-## Project setup
-```
-yarn install
-```
+## how to use
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+import CalendarComponent.vue
 
-### Compiles and minifies for production
-```
-yarn build
-```
+### normal
 
-### Lints and fixes files
-```
-yarn lint
-```
+`
+<CalendarComponent
+        :date="new Date()"
+        :width="400"
+        :height="200"
+      ></CalendarComponent>`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### date picker
+
+`<CalendarComponent
+:date="new Date()"
+type="pick"
+@pick-date="pickDate"
+:width="300"
+:height="300" ></CalendarComponent>`
+
+`pickDate(date) {
+this.date = date;
+}`
+
+### date range picker
+
+`
+<CalendarComponent
+:date="new Date()"
+type="range"
+@pick-date-range="pickDateRange"
+:width="300"
+:height="300" ></CalendarComponent>`
+
+`
+pickDateRange(dateRange) {
+this.dateRange = dateRange;
+}`
